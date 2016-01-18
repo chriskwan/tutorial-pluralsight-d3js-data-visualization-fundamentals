@@ -12,17 +12,19 @@
         .data(dataset)
         .enter()
         .append("rect")
-        .attr("x", function(d, i) {
+    .attr({
+        x: function(d, i) {
             return i * (w/ dataset.length);
-        })
-        .attr("y", function(d) {
+        },
+        y: function(d) {
             return h - (d*4);
-        })
-        .attr("width", w / dataset.length - padding)
-        .attr("height", function(d) {
+        },
+        width: w / dataset.length - padding,
+        height: function(d) {
             return d*4;
-        })
-        .attr("fill", function(d) {
+        },
+        fill: function(d) {
             return "rgb(0," + (d*10) + ", 0)";
-        });
+        }
+    });
 })();
