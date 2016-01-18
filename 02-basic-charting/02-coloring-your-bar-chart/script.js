@@ -8,6 +8,11 @@
         .attr("width", w)
         .attr("height", h);
 
+    function colorPicker(v) {
+        if (v<=20) { return "#666666"; }
+        else if (v>20) { return "#FF0033"; }
+    }
+
     svg.selectAll("rect")
         .data(dataset)
         .enter()
@@ -24,7 +29,7 @@
             return d*4;
         },
         fill: function(d) {
-            return "rgb(0," + (d*10) + ", 0)";
+            return colorPicker(d);
         }
     });
 })();
