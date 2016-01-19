@@ -58,7 +58,7 @@
         .enter()
         .append("text")
     .text(function(d) {
-        return showMinMax(monthlySales, 'sales', d.sales, 'minmax');
+        return showMinMax(monthlySales, 'sales', d.sales, 'all');
     })
     .attr({
         x: function(d) { return (d.month*3)-28 },
