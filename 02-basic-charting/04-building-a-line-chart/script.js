@@ -32,7 +32,7 @@
     var lineFun = d3.svg.line()
     .x(function(d) { return d.month*3; })
     .y(function(d) { return h - d.sales; })
-    .interpolate("linear");
+    .interpolate("basis"); // other values: https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate
 
     var svg = d3.select("body").append("svg").attr({
         width: w, height: h});
