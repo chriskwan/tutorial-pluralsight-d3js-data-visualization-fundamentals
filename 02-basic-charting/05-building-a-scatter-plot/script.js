@@ -25,10 +25,18 @@
         var max = d3.max(ds, function(d) { return d[col]; });
         var min = d3.min(ds, function(d) { return d[col]; });
 
-        if (type == "minmax" && (val == max || val == min)) {
+        if (type === "minmaxall") {
+            if (val === max) {
+                return "max: " + val;
+            } else if (val === min) {
+                return "min: " + val;
+            } else {
+                return val;
+            }
+        } else if (type === "minmax" && (val === max || val === min)) {
             return val;
         } else {
-            if (type == "all") {
+            if (type === "all") {
                 return val;
             }
         } 
@@ -58,7 +66,7 @@
         .enter()
         .append("text")
     .text(function(d) {
-        return showMinMax(monthlySales, 'sales', d.sales, 'all');
+        return showMinMax(monthlySales, 'sales', d.sales, 'minmaxall');
     })
     .attr({
         x: function(d) { return (d.month*3)-28 },
