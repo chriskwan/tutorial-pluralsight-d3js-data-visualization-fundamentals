@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="d3.min.js" charset="utf-8"></script>
+    </head>
+    <body>
+    <script>
+          
+          var h=100;
+          var w=400;
+          var ds; //global var for data
+          var salesTotal = 0.0; //gives it right datatype
+          
+          function buildLine() {
+              var lineFun = d3.svg.line()
+                .x(function (d) { return ((d.month-20130001)/3.25)})
+                .y(function (d) { return h-d.sales; })
+                .interpolate("linear");
+                
+              var svg = d3.select("body").append("svg").attr({ width: w, height: h});
+              
+              var viz = svg.append("path")
+                            .attr({
+                               d: lineFun(ds),
+                               "stroke": "purple",
+                               "stroke-width": 2,
+                               "fill": "none"
+                            }); 
+          };
+          
+          function showTotals() {
+              var t = d3.select("body").append("table");
+              
+              //get total
+              for (var i=0; i<ds.length; i++) {
+                  salesTotal += ds[i]['sales']*1; //convert to number
+              }
+              
+              //add total to table
+              var tr = t.selectAll("tr")
+                        .data([1]) //arbitrary
+                        .enter()
+                        .append("tr")
+                        .append("td")
+                        .text("Sales Total: " + salesTotal);
+          };
+          
+          d3.csv("MonthlySales.csv", function(error, data) {
+              if (error) {
+                  console.log(error);
+              } else {
+                  console.log(data);
+                  ds = data;
+              }
+              
+              buildLine();
+              showTotals();
+          });
+               
+    </script>
+    </body>
+</html>
