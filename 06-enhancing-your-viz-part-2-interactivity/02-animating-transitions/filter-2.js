@@ -56,7 +56,7 @@
                        "stroke-width": 2,
                        "fill": "none",
                        "class": "path-" + ds.category
-                    }); 
+                    });
     };
 
    function updateLine(ds) {
@@ -109,15 +109,17 @@
             .text(ds.category + " Sales (2013)");
     }
 
-    d3.json("https://api.github.com/repos/bsullins/d3js-resources/contents/monthlySalesbyCategoryMultiple.json", function(error, data) {
+    //d3.json("https://api.github.com/repos/bsullins/d3js-resources/contents/monthlySalesbyCategoryMultiple.json", function(error, data) {
+    d3.json("MonthlySalesbyCategoryMultiple.json", function(error, data) {
       if (error) {
           console.log(error);
       } else {
           //we're golden!
       }
 
-      var decodedData = JSON.parse(window.atob(data.content));
-      
+      //var decodedData = JSON.parse(window.atob(data.content));
+      var decodedData = data;
+
       decodedData.contents.forEach(function(ds) {
          showHeader(ds);
          buildLine(ds);
@@ -128,7 +130,8 @@
         .on("change", function(d, i) {
           var sel = d3.select("#date-option").node().value;
 
-          var decodedData = JSON.parse(window.atob(data.content));
+          //var decodedData = JSON.parse(window.atob(data.content));
+          var decodedData = data;
 
           decodedData.contents.forEach(function(ds) {
             //filter array based on selection
@@ -138,4 +141,5 @@
           });
         })
     });
+
 })();
