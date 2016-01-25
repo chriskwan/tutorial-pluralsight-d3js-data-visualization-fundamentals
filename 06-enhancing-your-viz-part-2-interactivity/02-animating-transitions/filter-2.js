@@ -118,7 +118,7 @@
       }
 
       //var decodedData = JSON.parse(window.atob(data.content));
-      var decodedData = data;
+      var decodedData = JSON.parse(JSON.stringify(data)); // new deep copy of the object
 
       decodedData.contents.forEach(function(ds) {
          showHeader(ds);
@@ -131,7 +131,7 @@
           var sel = d3.select("#date-option").node().value;
 
           //var decodedData = JSON.parse(window.atob(data.content));
-          var decodedData = data;
+          var decodedData = JSON.parse(JSON.stringify(data)); // new deep copy of the object
 
           decodedData.contents.forEach(function(ds) {
             //filter array based on selection
