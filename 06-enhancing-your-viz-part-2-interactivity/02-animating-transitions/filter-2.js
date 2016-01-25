@@ -57,6 +57,31 @@
                        "fill": "none",
                        "class": "path-" + ds.category
                     });
+
+      // Animate the drawing of the path!
+      // Ref: http://stackoverflow.com/a/13893296
+
+      // assumes path has been added already (i.e. don't have to wait for any duration to complete)
+      var path = svg.selectAll(".path-" + ds.category);
+      var totalLength = path.node().getTotalLength();
+
+      // We cheat by animating a very large dashed line
+      // Ref: https://jakearchibald.com/2013/animated-line-drawing-svg/
+      viz
+        // make each dash as big as the whole line
+        // specify length of the rendered part and length of the gap between dashes
+        .attr("stroke-dasharray", totalLength + " " + totalLength)
+
+        // specify where the dasharray starts
+        .attr("stroke-dashoffset", totalLength)
+        
+        // slowly decrease the dashoffset
+        // to gradually show more rendered part and less gap
+        // giving the appearance of the line being drawn!
+        .transition()
+        .duration(1500)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0); // full line - all rendered part, no gap
     };
 
    function updateLine(ds) {
