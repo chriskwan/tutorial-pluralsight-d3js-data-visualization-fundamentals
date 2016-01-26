@@ -155,7 +155,17 @@
                     .ease("bounce")
                     .attr({
                        d: lineFun(ds.monthlySales)
-                    }); 
+                    });
+
+      // Update dots positions
+      var dots = svg.selectAll(".circle-" + ds.category)
+                    .transition()
+                    .duration(500)
+                    .ease("ease")
+                    .attr({
+                        cx: function(d) { return xScale(getDate(d.month)); },
+                        cy: function(d) { return yScale(d.sales); }
+                    });
     };
 
     function showHeader(ds) {
