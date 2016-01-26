@@ -1,0 +1,30 @@
+.x-axis path, .y-axis path,
+.x-axis line, .y-axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.x-axis text, .y-axis text {
+    font-family: sans-serif;
+    font-size: 10px;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+div.tooltip {
+    position: absolute;
+    max-width: 200px;
+    height: auto;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+    pointer-events: none; /* VERY IMPORTANT that when mouse is on top it doesn't take over mouse events */
+    font-family: sans-serif;
+    font-size: 12px;
+}
